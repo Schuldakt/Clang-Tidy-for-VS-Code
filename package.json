@@ -108,10 +108,10 @@
     }
   },
   "scripts": {
-    "build": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --platform=node --target=node18 --format=cjs --sourcemap",
+    "build": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --platform=node --target=node26 --format=cjs --sourcemap",
     "watch": "pnpm build --watch",
     "lint": "eslint src --ext ts",
-    "vscode:prepublish": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --platform=node --target=node18 --format=cjs --minify",
+    "vscode:prepublish": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --platform=node --target=node26 --format=cjs --minify",
     "package": "vsce package",
     "deploy": "vsce publish -p"
   },
