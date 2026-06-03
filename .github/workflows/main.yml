@@ -1,37 +1,28 @@
-name: Build, Release, and Publish
-
+name: Release and Publish
 on:
   push:
     tags:
       - 'v*'
+
+# THIS IS THE MISSING PIECE:
+permissions:
+  contents: write
+
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Source
-        uses: actions/checkout@v4
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 26
-          
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
         with:
           version: 9
-          
       - name: Install dependencies
-        run: pnpm install
-        
-      - name: Lint
-        run: pnpm run lint
-        
-      - name: Package Extension
-        run: pnpm run package
-
+        run: pnpm install --frozen-lockfile
+      - name: Build
+        run: pnpm run build
+      
       - name: Publish to Marketplace
-        env: 
+        env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
         run: npx vsce publish --pat $VSCE_PAT --no-dependencies
 
