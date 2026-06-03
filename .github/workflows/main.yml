@@ -20,12 +20,6 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build
         run: pnpm run build
-      
-      - name: Publish to Marketplace
-        env:
-          VSCE_PAT: ${{ secrets.VSCE_PAT }}
-        run: npx vsce publish --pat $VSCE_PAT --no-dependencies
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
