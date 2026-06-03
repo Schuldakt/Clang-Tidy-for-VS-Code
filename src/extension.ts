@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import type { ClangdExtension } from '@clangd/vscode-clangd';
-import type { BaseLanguageClient } from 'vscode-languageclient';
 import { ClangTidyEngine } from '@clang-tidy/engine';
 import { ClangTidySidebarProvider } from '@clang-tidy/ui';
 import { initOutput, output } from '@clang-tidy/lsp';

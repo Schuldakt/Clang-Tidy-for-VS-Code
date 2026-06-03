@@ -19,7 +19,7 @@
     "color": "#13151a",
     "theme": "dark"
   },
-  "type": "module",
+  "type": "commonjs",
   "extensionDependencies": [
     "llvm-vs-code-extensions.vscode-clangd"
   ],
@@ -126,6 +126,7 @@
     "eslint": "^10.4.1",
     "globals": "^17.6.0",
     "typescript": "^6.0.3",
+    "typescript-eslint": "^8.60.1",
     "vscode-languageclient": "^8.0.2",
     "vscode-languageserver": "^9.0.1"
   }
