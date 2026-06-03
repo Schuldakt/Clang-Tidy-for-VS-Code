@@ -1,0 +1,19 @@
+{
+  "name": "@clang-tidy/src",
+  "version": "1.0.0",
+  "description": "",
+  "main": "extension.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@clang-tidy/engine": "workspace:*",
+    "@clang-tidy/lsp": "workspace:*",
+    "@clang-tidy/ui": "workspace:*",
+    "@clang-tidy/types": "workspace:*"
+  }
+}

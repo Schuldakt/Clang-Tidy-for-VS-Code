@@ -1,0 +1,88 @@
+{
+    "$schema": {
+        "url": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json"
+    },
+    "name": "Clang-Tidy Output",
+    "scopeName": "source.clang-tidy-output",
+    "patterns": [
+        {
+            "include": "#fix-block"
+        },
+        {
+            "include": "#debug-line"
+        }
+    ],
+    "repository": {
+        "fix-block": {
+            "patterns": [
+                {
+                    "include": "#check-name"
+                },
+                {
+                    "include": "#file-location"
+                },
+                {
+                    "include": "#removal"
+                },
+                {
+                    "include": "#insertion"
+                },
+                {
+                    "include": "#separator"
+                }
+            ]
+        },
+        "check-name": {
+            "match": "^(⚑ )(.+)$",
+            "captures": {
+                "1": {
+                    "name": "keyword.operator.clang-tidy"
+                },
+                "2": {
+                    "name": "entity.name.function.clang-tidy"
+                }
+            }
+        },
+        "file-location": {
+            "match": "^(  @ )(.+)$",
+            "captures": {
+                "1": {
+                    "name": "comment.clang-tidy"
+                },
+                "2": {
+                    "name": "string.unquoted.clang-tidy"
+                }
+            }
+        },
+        "removal": {
+            "match": "^(  - )(.*)$",
+            "captures": {
+                "1": {
+                    "name": "invalid.illegal.clang-tidy"
+                },
+                "2": {
+                    "name": "invalid.illegal.clang-tidy"
+                }
+            }
+        },
+        "insertion": {
+            "match": "^(  \\+ )(.*)$",
+            "captures": {
+                "1": {
+                    "name": "markup.inserted.clang-tidy"
+                },
+                "2": {
+                    "name": "markup.inserted.clang-tidy"
+                }
+            }
+        },
+        "separator": {
+            "match": "^─+$",
+            "name": "comment.line.clang-tidy"
+        },
+        "debug-line": {
+            "match": "^\\[.*?\\].*$",
+            "name": "comment.line.double-slash.clang-tidy"
+        }
+    }
+}

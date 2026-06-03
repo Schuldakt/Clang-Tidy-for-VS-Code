@@ -1,0 +1,14 @@
+{
+  "name": "@clang-tidy/engine",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "export": {
+    ".": "./src/index.ts"
+  },
+  "type": "module",
+  "dependencies": {
+    "@types/vscode": "^1.120.0",
+    "@clang-tidy/types": "workspace:*",
+    "@clang-tidy/lsp": "workspace:*"
+  }
+}

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; style-src {{cspSource}} 'unsafe-inline'; script-src 'nonce-{{nonce}}' {{cspSource}};" />
+    <link href="{{styleUri}}" rel="stylesheet" />
+</head>
+
+<body class="sidebar-root">
+    <div class="pane" id="pane-fixes" style="flex: 2">
+        <div class="pane-header" id="hdr-fixes">
+            <div class="pane-title-row">
+                <span class="arrow">▾</span>
+                <span class="pane-title">Fixes</span>
+                <span class="badge" id="pending-count">0</span>
+            </div>
+            <div class="pane-actions">
+                <button class="btn" id="refresh-btn" title="Re-scan">↻</button>
+                <button class="btn apply" id="apply-all-btn">✓ All</button>
+                <button class="btn dismiss" id="dismiss-all-btn">✕ All</button>
+            </div>
+        </div>
+        <div class="pane-body" id="pending-body">
+            <div class="scanning" id="scanning-indicator" style="display: none">Scanning...</div>
+            <div class="empty" id="pending-empty">No pending fixes.<br />Open a C/C++ file to scan.</div>
+            <div id="pending-files-container"></div>
+        </div>
+    </div>
+
+    <div class="drag-handle" id="drag-1"></div>
+
+    <div class="pane" id="pane-history" style="flex: 1">
+        <div class="pane-header" id="hdr-history">
+            <div class="pane-title-row">
+                <span class="arrow">▾</span>
+                <span class="pane-title">Fix History</span>
+                <span class="badge" id="history-count">0</span>
+            </div>
+            <div class="pane-actions">
+                <button class="btn" id="clear-history-btn">Clear</button>
+            </div>
+        </div>
+        <div class="pane-body" id="history-body">
+            <div class="empty" id="history-empty">No fixes applied yet.</div>
+        </div>
+    </div>
+
+    <div class="drag-handle" id="drag-2"></div>
+
+    <div class="pane" id="pane-checks" style="flex: 1">
+        <div class="pane-header" id="hdr-checks">
+            <div class="pane-title-row">
+                <span class="arrow">▾</span>
+                <span class="pane-title">Active Checks</span>
+                <span class="badge" id="checks-count">0</span>
+            </div>
+            <div class="pane-actions">
+                <span class="btn" id="checks-file-label" style="
+              pointer-events: none;
+              opacity: 0.4;
+              font-size: 10px;
+              max-width: 100px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            "></span>
+            </div>
+        </div>
+        <div class="pane-body" id="checks-body">
+            <div class="checks-toolbar">
+                <input class="checks-search" id="checks-search" placeholder="Filter checks..." type="search" />
+            </div>
+            <div id="checks-list">
+                <div class="no-config" id="checks-empty">Open a C/C++ file to load active checks.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="drag-handle" id="drag-3"></div>
+
+    <div class="pane" id="pane-settings" style="flex: 1">
+        <div class="pane-header" id="hdr-settings">
+            <div class="pane-title-row">
+                <span class="arrow">▾</span>
+                <span class="pane-title">Settings</span>
+            </div>
+        </div>
+        <div class="pane-body" id="settings-body">
+            <div class="setting-row">
+                <div class="setting-label">Fix on save</div>
+                <div class="setting-desc">
+                    Toggle whether to apply quick fixes whenever C/C++ file is saved.
+                </div>
+                <div class="setting-control">
+                    <label class="toggle">
+                        <input type="checkbox" id="s-fixOnSave" />
+                        <div class="toggle-track"></div>
+                        <div class="toggle-thumb"></div>
+                    </label>
+                </div>
+            </div>
+            <div class="setting-row">
+                <div class="setting-lable">Fix timeout (ms)</div>
+                <div class="setting-desc">Max wait for clangd to return fixes.</div>
+                <div class="setting-control">
+                    <input class="setting-input" type="number" id="s-fixTimeoutMs" min="500" max="30000" step="500" />
+                </div>
+            </div>
+            <div class="setting-row">
+                <div class="setting-label">Checks filter</div>
+                <div class="setting-desc">
+                    Only apply fixes from these checks (comma-separated regex). Empty = all.
+                </div>
+                <div class="setting-control">
+                    <input class="setting-input" type="text" id="s-checksFilter"
+                        placeholder="modernize-*, readability-*" />
+                </div>
+            </div>
+            <div class="setting-row">
+                <div class="setting-label">Blacklist</div>
+                <div class="setting-desc">
+                    Skip files matching these patterns (comma-separated regex).
+                </div>
+                <div class="setting-control">
+                    <input class="setting-input" type="text" id="s-blacklist" placeholder=".*/third_party/.*" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script nonce="{{nonce}}" src="{{scriptUri}}"></script>
+</body>
+
+</html>

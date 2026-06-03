@@ -1,0 +1,131 @@
+{
+  "name": "clang-tidy",
+  "dependencies": {},
+  "displayName": "Clang-Tidy",
+  "description": "Integrates clang-tidy into VS Code with an interactive sidebar and the ability to apply fixes on save.",
+  "version": "1.0.0",
+  "publisher": "Schuldakt",
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "icon": "images/Clang-Tidy-Icon.png",
+  "repository": {
+    "url": "https://github.com/Schuldakt/VSCode-Clang-Tidy"
+  },
+  "galleryBanner": {
+    "color": "#13151a",
+    "theme": "dark"
+  },
+  "type": "commonjs",
+  "extensionDependencies": [
+    "llvm-vs-code-extensions.vscode-clangd"
+  ],
+  "activationEvents": [
+    "onLanguage:cpp",
+    "onLanguage:c",
+    "workspaceContains:**/.clang-tidy"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "clang-tidy-output",
+        "mimetypes": [
+          "text/x-clang-tidy-output"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "clang-tidy-output",
+        "scopeName": "source.clang-tidy-output",
+        "path": "syntaxes/clang-tidy-output.tmLanguage.json"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "clang-tidy-sidebar",
+          "title": "Clang-Tidy",
+          "icon": "images/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "clang-tidy-sidebar": [
+        {
+          "type": "webview",
+          "id": "clangTidy.sidebar",
+          "name": "Fixes",
+          "icon": "images/icon.svg"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "clang-tidy.applyFixes",
+        "title": "Clang-Tidy: Apply Fixes"
+      },
+      {
+        "command": "clang-tidy.scanFixes",
+        "title": "Clang-Tidy: Scan for Fixes"
+      },
+      {
+        "command": "clang-tidy.openPanel",
+        "title": "Clang-Tidy: Open Fix Panel"
+      }
+    ],
+    "configuration": {
+      "title": "Clang-Tidy",
+      "properties": {
+        "clang-tidy.checksFilter": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Only apply fixes from these clang-tidy checks. Supports regex. Empty means apply all fixes."
+        },
+        "clang-tidy.fixOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically apply clang-tidy quick fixes on save."
+        },
+        "clang-tidy.fixTimeoutMs": {
+          "type": "number",
+          "default": 3000,
+          "description": "Max wait time in ms for clangd."
+        },
+        "clang-tidy.blacklist": {
+          "type": "array",
+          "default": [],
+          "description": "List of regular expressions. Files whose paths match any entry will be skipped."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --platform=node --target=node18 --format=cjs --sourcemap",
+    "watch": "pnpm build --watch",
+    "lint": "eslint src --ext ts",
+    "vscode:prepublish": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --platform=node --target=node18 --format=cjs --minify",
+    "package": "vsce package",
+    "deploy": "vsce publish -p"
+  },
+  "devDependencies": {
+    "@clangd/vscode-clangd": "^0.0.0",
+    "vscode-languageclient": "^8.0.2",
+    "vscode-languageserver": "^9.0.1",
+    "@types/node": "^25.9.1",
+    "@typescript-eslint/eslint-plugin": "^8.60.1",
+    "@typescript-eslint/parser": "^8.60.1",
+    "@vscode/vsce": "^3.9.1",
+    "esbuild": "^0.28.0",
+    "eslint": "^10.4.1",
+    "typescript": "^6.0.3"
+  }
+}

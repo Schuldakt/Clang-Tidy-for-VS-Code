@@ -1,0 +1,16 @@
+{
+  "name": "@clang-tidy/types",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "vscode-languageclient": "8.0.2"
+  }
+}

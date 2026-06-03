@@ -1,0 +1,21 @@
+# Exclude source code (not needed in final extension)
+src/**
+
+# Exclude configuration and build metadata
+.gitignore
+.editorconfig
+.eslintrc.json
+.prettierrc.yaml
+.prettierignore
+tsconfig.json
+pnpm-lock.yaml
+pnpm-workspace.yaml
+
+# Exclude development tests and tools
+.vscode-test/**
+out/test/**
+node_modules/**
+**/*.map
+
+# Keep webview assets if they aren't already in /out
+!src/packages/ui/webview/**

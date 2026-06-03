@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+.pnpm-debug.log
+.pnpm-store/
+
+# Build and Packaging Output
+out/
+dist/
+*.vsix
+.vsce/
+
+# Logs and Debugging
+*.log
+*.log.*
+.vscode-test/
+.history/
+
+# VS Code Specific
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# macOS / System
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# OS Specific
+Thumbs.db
+ehthumbs.db
+
+# TypeScript / Build
+*.tsbuildinfo
+
+# Webview/UI Specific
+# (If you choose to have build artifacts generated for the webview)
+src/packages/ui/webview/dist/

@@ -1,0 +1,12 @@
+{
+  "name": "@clang-tidy/lsp",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@clang-tidy/types": "workspace:*"
+  }
+}

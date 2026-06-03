@@ -1,0 +1,14 @@
+{
+  "name": "@clang-tidy/ui",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "export": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@clang-tidy/engine": "workspace:*",
+    "@clang-tidy/lsp": "workspace:*",
+    "@clang-tidy/types": "workspace:*"
+  },
+  "type": "module"
+}
