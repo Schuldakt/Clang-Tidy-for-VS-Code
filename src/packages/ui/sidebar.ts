@@ -39,7 +39,7 @@ export class ClangTidySidebarProvider implements vscode.WebviewViewProvider {
     private readonly _extensionUri: vscode.Uri,
     private readonly engine: ClangTidyEngine,
   ) {
-    this.engine.onDidUpdateFixes((uri) => {
+    this.engine.onDidUpdateFixes((_uri) => {
       // Fetch the FULL state from the engine, now that it tracks everything
       this._pending = this.engine.getAllFixes();
 
@@ -52,17 +52,20 @@ export class ClangTidySidebarProvider implements vscode.WebviewViewProvider {
   }
 
   public resolveWebviewView(
-    webviewView: vscode.WebviewView,
+    _webviewView: vscode.WebviewView,
     _ctx: vscode.WebviewViewResolveContext,
     _tok: vscode.CancellationToken,
   ): void {
-    this._view = webviewView;
-    webviewView.webview.options = { enableScripts: true, localResourceRoots: [this._extensionUri] };
-    webviewView.webview.html = this._getHtml(webviewView.webview);
-    this._attachMessageHandler(webviewView.webview);
+    this._view = _webviewView;
+    _webviewView.webview.options = {
+      enableScripts: true,
+      localResourceRoots: [this._extensionUri],
+    };
+    _webviewView.webview.html = this._getHtml(_webviewView.webview);
+    this._attachMessageHandler(_webviewView.webview);
 
-    webviewView.onDidChangeVisibility(() => {
-      if (webviewView.visible) {
+    _webviewView.onDidChangeVisibility(() => {
+      if (_webviewView.visible) {
         const ed = vscode.window.activeTextEditor;
         if (ed && isEligibleDoc(ed.document)) {
           this._post({ command: 'setScanning', value: true });
@@ -622,7 +625,7 @@ export class ClangTidySidebarProvider implements vscode.WebviewViewProvider {
       'sidebar.css',
     );
 
-    let html = fs.readFileSync(htmlPath.fsPath, 'utf8');
+    const html = fs.readFileSync(htmlPath.fsPath, 'utf8');
     const scriptUri = webview.asWebviewUri(scriptPath);
     const styleUri = webview.asWebviewUri(stylePath);
     const nonce = getNonce();
@@ -769,7 +772,7 @@ function parseConfigFile(filePath: string): ParsedConfig | null {
     }
 
     return { filePath, relPath: '', checks, checkOptions, inherits };
-  } catch (err) {
+  } catch (_err) {
     return null;
   }
 }
@@ -890,7 +893,7 @@ async function insertNolint(
   let doc: vscode.TextDocument;
   try {
     doc = await vscode.workspace.openTextDocument(uri);
-  } catch (err) {
+  } catch (_err) {
     return null;
   }
   const zl = line - 1;

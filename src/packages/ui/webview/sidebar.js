@@ -1,6 +1,6 @@
 const vscode = acquireVsCodeApi();
 
-window.onerror = function (message, source, lineno, colno, error) {
+window.onerror = function (message, source, lineno) {
   vscode.postMessage({
     command: 'log',
     text: 'Global JS Error: ' + message + ' at line ' + lineno,

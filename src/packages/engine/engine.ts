@@ -21,7 +21,7 @@ export class ClangTidyEngine implements vscode.Disposable {
   constructor(private clangdExtension: ClangdExtension) {}
 
   private get client(): BaseLanguageClient {
-    return this.clangdExtension.getApi(1).languageClient as any;
+    return this.clangdExtension.getApi(1).languageClient as BaseLanguageClient;
   }
 
   // ── Methods for the UI to safely update the Engine's state ──
@@ -39,7 +39,7 @@ export class ClangTidyEngine implements vscode.Disposable {
   }
   // ────────────────────────────────────────────────────────────
 
-  public activate(context: vscode.ExtensionContext) {
+  public activate(_: vscode.ExtensionContext) {
     // 1. Diagnostic observer (Only registers once)
     this._disposables.push(
       vscode.languages.onDidChangeDiagnostics((e) => {
@@ -191,7 +191,12 @@ export class ClangTidyEngine implements vscode.Disposable {
       }
 
       try {
-        const result: any = await fetchFixes(this.client, doc, timeoutMs, checksFilter);
+        const result: BaseLanguageClient = await fetchFixes(
+          this.client,
+          doc,
+          timeoutMs,
+          checksFilter,
+        );
 
         if (result === null || result === undefined) {
           output.appendLine('[engine] server returned null result - deferring!');
