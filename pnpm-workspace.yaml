@@ -1,5 +1,5 @@
 packages:
- - "src/package.json"
+ - "src/*"
  - "src/packages/*"
 
 
