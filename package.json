@@ -19,7 +19,7 @@
     "color": "#13151a",
     "theme": "dark"
   },
-  "type": "commonjs",
+  "type": "module",
   "extensionDependencies": [
     "llvm-vs-code-extensions.vscode-clangd"
   ],
