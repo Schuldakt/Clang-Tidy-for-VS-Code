@@ -112,7 +112,7 @@
     "watch": "pnpm build --watch",
     "lint": "eslint src --ext ts",
     "vscode:prepublish": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --platform=node --target=node26 --format=cjs --minify",
-    "package": "vsce package",
+    "package": "vsce package --no-dependencies",
     "deploy": "vsce publish -p"
   },
   "devDependencies": {
