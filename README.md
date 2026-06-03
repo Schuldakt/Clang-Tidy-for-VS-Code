@@ -1,4 +1,4 @@
-![Clang-Tidy Banner](https://imgur.com/HOUprwX)
+![Clang-Tidy Banner](images/Clang-Tidy-Banner.png)
 
 # Clang-Tidy for VS Code
 
