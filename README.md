@@ -46,7 +46,7 @@ You can customize this extension through your VS Code settings by searching for 
 
 ## Known Issues & Contributions
 
-Found an issue or want to contribute? Please review the [CONTRIBUTING.md](CONTRIBUTING.md) and report any bugs or feature requests on our [GitHub repository](https://github.com/Schuldakt/VSCode-Clang-Tidy).
+Found an issue or want to contribute? Please review the [CONTRIBUTING.md](CONTRIBUTING.md) and report any bugs or feature requests on our [GitHub repository](https://github.com/Schuldakt/Clang-Tidy-for-VS-Code.git).
 
 ## License
 
