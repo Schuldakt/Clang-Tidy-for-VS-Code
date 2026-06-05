@@ -10,15 +10,17 @@ export async function fetchFixes(
   timeoutMs: number,
   checksFilter: string[],
 ): Promise<FetchFixesResult> {
+  const lastLineIndex = Math.max(0, doc.lineCount - 1);
+  const lastLineLength = doc.lineAt(lastLineIndex).text.length;
+
   const params = {
     textDocument: { uri: doc.uri.toString() },
     range: {
       start: { line: 0, character: 0 },
-      end: { line: Math.max(0, doc.lineCount - 1), character: 0 },
+      end: { line: lastLineIndex, character: lastLineLength },
     },
     context: {
       diagnostics: buildDiagnosticsContext(doc),
-      only: ['quickfix'],
     },
   };
 

@@ -12,4 +12,9 @@ export interface LspCodeAction {
       edits: LspTextEdit[];
     }>;
   };
+  command?: {
+    title: string;
+    command: string;
+    arguments?: any[];
+  };
 }

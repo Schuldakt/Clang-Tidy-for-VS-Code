@@ -1,8 +1,10 @@
 import { LspCodeAction } from '@clang-tidy/types';
 
 export function isClangTidyQuickfix(action: LspCodeAction, checksFilter: string[]): boolean {
-  if (!action.kind?.startsWith('quickfix')) return false;
-  if (!action.edit) return false;
+  if (action.kind && !action.kind.startsWith('quickfix')) return false;
+
+  // Allow through if it has an edit OR a command payload
+  if (!action.edit && !action.command) return false;
 
   const isFromClangTidy = action.diagnostics?.some((d) => d.source === 'clang-tidy') ?? false;
 

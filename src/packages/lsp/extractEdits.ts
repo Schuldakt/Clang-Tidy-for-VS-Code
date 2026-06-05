@@ -1,23 +1,24 @@
 import * as vscode from 'vscode';
-import { LspCodeAction, LspTextEdit } from '@clang-tidy/types';
+import { LspTextEdit } from '@clang-tidy/types';
 
-export function extractEdits(action: LspCodeAction, docUri: string): LspTextEdit[] {
-  const edit = action.edit;
+// Changed signature to accept the WorkspaceEdit object directly
+export function extractEdits(edit: any, docUri: string): LspTextEdit[] {
   if (!edit) return [];
 
-  // Parse the target URI once to compare filesystem paths safely
   const targetFsPath = vscode.Uri.parse(docUri).fsPath;
 
   if (edit.documentChanges) {
     return edit.documentChanges
-      .filter((c) => vscode.Uri.parse(c.textDocument.uri).fsPath === targetFsPath)
-      .flatMap((c) => c.edits);
+      .filter(
+        (c: any) => c.textDocument && vscode.Uri.parse(c.textDocument.uri).fsPath === targetFsPath,
+      )
+      .flatMap((c: any) => c.edits || []);
   }
 
   if (edit.changes) {
     for (const [uri, edits] of Object.entries(edit.changes)) {
       if (vscode.Uri.parse(uri).fsPath === targetFsPath) {
-        return edits;
+        return edits as LspTextEdit[];
       }
     }
   }

@@ -18,7 +18,14 @@ export function buildPendingFix(
     if (i < doc.lineCount) originalLines.push(doc.lineAt(i).text);
   }
   const before = originalLines.join('\n').trimEnd();
-  const after = applyEditsToText(before, lspEdits, minLine).trimEnd();
+
+  const sortedEdits = [...lspEdits].sort((a, b) =>
+    a.range.start.line !== b.range.start.line
+      ? b.range.start.line - a.range.start.line
+      : b.range.start.character - a.range.start.character,
+  );
+
+  const after = applyEditsToText(before, sortedEdits, minLine).trimEnd();
 
   const serializable: SerializableEdit[] = lspEdits.map((e) => ({
     startLine: e.range.start.line,
